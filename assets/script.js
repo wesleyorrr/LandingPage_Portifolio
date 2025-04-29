@@ -1,3 +1,43 @@
+document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Obter valores dos campos
+    const nome = document.getElementById('nome').value;
+    const telefone = document.getElementById('telefone').value;
+    const email = document.getElementById('email').value;
+    const assunto = document.getElementById('assunto').value;
+    const mensagem = document.getElementById('mensagem').value;
+
+    // Validar campos obrigatórios
+    if (!nome || !telefone || !email || !assunto || !mensagem) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+    }
+
+    // Formatar mensagem para WhatsApp
+    const texto = `Olá, meu nome é ${nome}.%0A%0A*Assunto:* ${assunto}%0A*Mensagem:* ${mensagem}%0A%0A*Contatos:*%0A- Telefone: ${telefone}%0A- Email: ${email}`;
+    
+    // Criar URL do WhatsApp (substitua pelo seu número)
+    const whatsappUrl = `https://wa.me/5538999894056?text=${encodeURIComponent(texto)}`;
+    
+    // Abrir WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Limpar formulário
+    this.reset();
+    
+    // Mostrar mensagem de sucesso (opcional)
+    const alert = document.createElement('div');
+    alert.className = 'form-alert success';
+    alert.innerHTML = '<i class="fas fa-check-circle"></i><span>Mensagem enviada com sucesso!</span>';
+    this.appendChild(alert);
+    
+    // Remover mensagem após 5 segundos
+    setTimeout(() => {
+        alert.remove();
+    }, 5000);
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Efeito do cursor personalizado
     const cursor = document.querySelector('.cursor');
